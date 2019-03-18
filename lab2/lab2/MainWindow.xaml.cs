@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -50,6 +51,13 @@ namespace lab2
         private async void Download_Click(object sender, RoutedEventArgs e)
         {
             var resultTask = StringDownload();
+
+            var htmlDocument = new HtmlDocument();
+            htmlDocument.LoadHtml(await resultTask);
+
+            var parsedList = htmlDocument.DocumentNode.Descendants("span")
+                .Where(node => node.GetAttributeValue("class", "").Equals("json-temperature")).ToList();
+
             downloadedDataBox.Text = await resultTask;
         }
     }
