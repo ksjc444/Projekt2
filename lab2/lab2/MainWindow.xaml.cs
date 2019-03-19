@@ -61,17 +61,18 @@ namespace lab2
 
             //Druga metoda za pomocą ścieżki xPath również obsługiwanej przez HtmlAgilityPack
             var weatherState = htmlDocument.DocumentNode.SelectNodes("//li[@class='weather-currently-icon-description']").First().InnerText.Trim();
-
             var weatherTemperatureFelt = htmlDocument.DocumentNode.SelectSingleNode("//li[@class='weather-currently-details-item feelTemperature']/span").InnerText;
             var weatherPressure = htmlDocument.DocumentNode.SelectSingleNode("//li[@class='weather-currently-details-item pressure']/span").InnerText.Replace(" ", "");
             var weatherWind = htmlDocument.DocumentNode.SelectSingleNode("//li[@class='weather-currently-details-item wind']/span").InnerText.Replace(" ", "");
+            var weatherIcon = htmlDocument.DocumentNode.SelectSingleNode("//div[@class='weather-currently-icon ico-33']");
 
             weatherData = new WeatherData(weatherTemperature, weatherTemperatureFelt, weatherPressure, weatherWind, weatherState);
 
-            downloadedDataBox.Text = weatherData + "\n";
-            downloadedDataBox.Text += weatherState + "\n";
-            downloadedDataBox.Text += weatherPressure + "\n";
-            downloadedDataBox.Text += weatherWind + "\n";
+            downloadedDataBox.Text = "Temperatura: " + weatherData.Temperature + "\n";
+            downloadedDataBox.Text += "Temperatura odczuwalna: " + weatherData.TemperatureFelt + "\n";
+            downloadedDataBox.Text += "Opis: " + weatherData.State + "\n";
+            downloadedDataBox.Text += "Ciśnienie: " + weatherData.Pressure + " hPa\n";
+            downloadedDataBox.Text += "Prędkość wiatru: " + weatherData.Wind + " km/h\n";
         }
     }
 }

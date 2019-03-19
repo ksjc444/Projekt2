@@ -11,17 +11,17 @@ namespace lab2
     {
         public WeatherData(string setTemperature, string setTemperatureFelt, string setPressure, string setWind, string setState)
         {
-            temperature = int.Parse(Regex.Replace(setTemperature, "[^0-9]", ""));
-            temperatureFelt = int.Parse(Regex.Replace(setTemperatureFelt, "[^0-9]", ""));
-            pressure = int.Parse(Regex.Replace(setPressure, "[^0-9]", ""));
-            wind = int.Parse(Regex.Replace(setWind, "[^0-9]", ""));
-            state = setState;
+            Temperature = int.Parse(Regex.Replace(setTemperature, "[^-0-9]", ""));
+            TemperatureFelt = int.Parse(Regex.Replace(setTemperatureFelt, "[^-0-9]", ""));
+            Pressure = int.Parse(Regex.Replace(setPressure, "[^0-9]", ""));
+            Wind = int.Parse(Regex.Replace(setWind, "[^0-9]", ""));
+            State = setState;
         }
 
-        int temperature;
-        int temperatureFelt;
-        int pressure;
-        int wind;
-        string state;
+        public int Temperature { get; }
+        public int TemperatureFelt { get; }
+        public int Pressure { get; }
+        public int Wind { get; }
+        public string State { get; }
     }
 }
