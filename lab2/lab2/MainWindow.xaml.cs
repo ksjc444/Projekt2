@@ -30,7 +30,7 @@ namespace lab2
             {
                 try
                 {
-                    responseBody = await client.GetStringAsync("https://pogoda.interia.pl/prognoza-szczegolowa-wroclaw,cId,39240");
+                    responseBody = await client.GetStringAsync("https://pogoda.onet.pl/prognoza-pogody/wroclaw-362450");
                 }
                 catch(HttpRequestException e)
                 {
@@ -64,7 +64,7 @@ namespace lab2
             var weatherTemperatureFelt = htmlDocument.DocumentNode.SelectSingleNode("//li[@class='weather-currently-details-item feelTemperature']/span").InnerText;
             var weatherPressure = htmlDocument.DocumentNode.SelectSingleNode("//li[@class='weather-currently-details-item pressure']/span").InnerText.Replace(" ", "");
             var weatherWind = htmlDocument.DocumentNode.SelectSingleNode("//li[@class='weather-currently-details-item wind']/span").InnerText.Replace(" ", "");
-            var weatherIcon = htmlDocument.DocumentNode.SelectSingleNode("//div[@class='weather-currently-icon ico-33']");
+            //var weatherIcon = htmlDocument.DocumentNode.SelectSingleNode("//div[@class='weather-currently-icon ico-33']");
 
             weatherData = new WeatherData(weatherTemperature, weatherTemperatureFelt, weatherPressure, weatherWind, weatherState);
 
