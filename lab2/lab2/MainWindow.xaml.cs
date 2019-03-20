@@ -70,7 +70,6 @@ namespace lab2
             var weatherClouds = weatherOtherParameters[3].InnerText;
             var weatherHumidity = weatherOtherParameters[4].InnerText;
 
-
             weatherData = new WeatherData(weatherTemperature, weatherTemperatureFelt, weatherPressure, weatherWind, weatherHumidity, weatherRain, weatherClouds, weatherState, weatherIcon);
             loadingImage.Visibility = Visibility.Collapsed;
         }
