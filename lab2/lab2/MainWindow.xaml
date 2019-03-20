@@ -3,11 +3,53 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
         xmlns:local="clr-namespace:lab2"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TextBlock x:Name="downloadedDataBox" HorizontalAlignment="Left" Margin="33,34,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="339" Width="332"/>
-        <Button x:Name="download" Content="Button" HorizontalAlignment="Left" Margin="469,32,0,0" VerticalAlignment="Top" Width="158" Height="72" Click="Download_Click"/>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFFAFEFF"/>
+                <GradientStop Color="#FFA4EDFD" Offset="0.798"/>
+                <GradientStop Color="#FF68C0FD"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Button x:Name="download" Content="Zaktualizuj" HorizontalAlignment="Center" Margin="0,100,0,0" VerticalAlignment="Top" Width="200" Height="50" Click="Download_Click" Background="White" BorderBrush="{x:Null}"/>
+        <Label Content="Pogoda Wrocław" HorizontalAlignment="center" VerticalAlignment="Top" Margin="0,10,0,0" FontSize="36" HorizontalContentAlignment="Center"/>
+        <Grid x:Name="mainWeatherDataGrid"  Visibility="Hidden" HorizontalAlignment="Center" Height="167" Margin="0,75,0,0" VerticalAlignment="Top" Width="290">
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                <TextBlock x:Name="temperatureDisplay" Text="" TextAlignment="Center" FontWeight="Bold" FontSize="48"/>
+                <Label Content="Odczuwalna:" HorizontalContentAlignment="Center" FontSize="16" FontStyle="Italic"/>
+                <TextBlock x:Name="temperatureFeltDisplay" Text="" TextAlignment="Center" FontSize="35"/>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Image x:Name="iconDisplay" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100"/>
+                <TextBlock x:Name="stateDisplay" TextAlignment="Center" FontSize="14"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel x:Name="additionaWeatherDataGrid" Visibility="Hidden" HorizontalAlignment="Center" Height="70" Margin="0,265,0,0" VerticalAlignment="Top" Orientation="Horizontal" Background="#4CFFFFFF">
+            <StackPanel Margin="15,0,15,0">
+                <Label Content="Wiatr" FontWeight="Bold" FontSize="14" HorizontalContentAlignment="Center"/>
+                <TextBlock x:Name="windDisplay" Text="" TextAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Margin="15,0,15,0">
+                <Label Content="Ciśnienie" FontWeight="Bold" FontSize="14" HorizontalContentAlignment="Center"/>
+                <TextBlock x:Name="pressureDisplay" Text="" TextAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Margin="15,0,15,0">
+                <Label Content="Wilgotność" FontWeight="Bold" FontSize="14" HorizontalContentAlignment="Center"/>
+                <TextBlock x:Name="humidityDisplay" Text="" TextAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Margin="15,0,15,0">
+                <Label Content="Zachmurzenie" FontWeight="Bold" FontSize="14" HorizontalContentAlignment="Center"/>
+                <TextBlock x:Name="cloudDisplay" Text="" TextAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Margin="15,0,15,0">
+                <Label Content="Deszcz" FontWeight="Bold" FontSize="14" HorizontalContentAlignment="Center"/>
+                <TextBlock x:Name="rainDisplay" Text="" TextAlignment="Center"/>
+            </StackPanel>
+        </StackPanel>
+        <Image x:Name="loadingImage" Visibility="Collapsed" gif:ImageBehavior.RepeatBehavior="Forever" gif:ImageBehavior.AnimatedSource="loading.gif" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="100"/>
     </Grid>
 </Window>
