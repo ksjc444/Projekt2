@@ -17,7 +17,7 @@
         </Grid.Background>
         <Button x:Name="download" Content="Zaktualizuj" HorizontalAlignment="Center" Margin="0,100,0,0" VerticalAlignment="Top" Width="200" Height="50" Click="Download_Click" Background="White" BorderBrush="{x:Null}"/>
         <Label Content="Pogoda Wrocław" HorizontalAlignment="center" VerticalAlignment="Top" Margin="0,10,0,0" FontSize="36" HorizontalContentAlignment="Center"/>
-        <Grid x:Name="mainWeatherDataGrid"  Visibility="Hidden" HorizontalAlignment="Center" Height="167" Margin="0,75,0,0" VerticalAlignment="Top" Width="290">
+        <Grid x:Name="mainWeatherDataGrid"  Visibility="Hidden" HorizontalAlignment="Center" Height="167" Margin="0,75,0,0" VerticalAlignment="Top" Width="380">
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
                 <TextBlock x:Name="temperatureDisplay" Text="" TextAlignment="Center" FontWeight="Bold" FontSize="48"/>
                 <Label Content="Odczuwalna:" HorizontalContentAlignment="Center" FontSize="16" FontStyle="Italic"/>
