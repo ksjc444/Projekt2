@@ -51,27 +51,34 @@ namespace lab2
             htmlDocument.LoadHtml(await resultTask);
 
             //Jedna z metod poruszania się po nodach (znacznikach) w html z użyciem biblioteki HtmlAgilityPack
-            var weatherTemperature = htmlDocument.DocumentNode.Descendants("div")
-                .Where(node => node.GetAttributeValue("class", "").Equals("temp")).First().InnerText;
+            try
+            {
+                var weatherTemperature = htmlDocument.DocumentNode.Descendants("div")
+                    .Where(node => node.GetAttributeValue("class", "").Equals("temp")).First().InnerText;
 
-            //Druga metoda za pomocą ścieżki xPath również obsługiwanej przez HtmlAgilityPack
-            var weatherState = htmlDocument.DocumentNode
-                .SelectNodes("//div[@class='forecastDesc']").First().InnerText.Trim();
-            var weatherTemperatureFelt = htmlDocument.DocumentNode
-                .SelectSingleNode("//span[@class='feelTempValue']").InnerText;
-            var weatherOtherParameters = htmlDocument.DocumentNode
-                .SelectNodes("//div[@class='weatherParams']/ul/li/span[@class='restParamValue']").ToList();
-            var weatherIcon = htmlDocument.DocumentNode
-                .SelectSingleNode("//div[@class='forecast']/span[@class='iconHolder']/img").GetAttributeValue("src", "");
+                //Druga metoda za pomocą ścieżki xPath również obsługiwanej przez HtmlAgilityPack
+                var weatherState = htmlDocument.DocumentNode
+                    .SelectNodes("//div[@class='forecastDesc']").First().InnerText.Trim();
+                var weatherTemperatureFelt = htmlDocument.DocumentNode
+                    .SelectSingleNode("//span[@class='feelTempValue']").InnerText;
+                var weatherOtherParameters = htmlDocument.DocumentNode
+                    .SelectNodes("//div[@class='weatherParams']/ul/li/span[@class='restParamValue']").ToList();
+                var weatherIcon = htmlDocument.DocumentNode
+                    .SelectSingleNode("//div[@class='forecast']/span[@class='iconHolder']/img").GetAttributeValue("src", "");
 
-            var weatherRain = weatherOtherParameters[0].InnerText;
-            var weatherWind = weatherOtherParameters[1].InnerText;
-            var weatherPressure = weatherOtherParameters[2].InnerText;
-            var weatherClouds = weatherOtherParameters[3].InnerText;
-            var weatherHumidity = weatherOtherParameters[4].InnerText;
+                var weatherRain = weatherOtherParameters[0].InnerText;
+                var weatherWind = weatherOtherParameters[1].InnerText;
+                var weatherPressure = weatherOtherParameters[2].InnerText;
+                var weatherClouds = weatherOtherParameters[3].InnerText;
+                var weatherHumidity = weatherOtherParameters[4].InnerText;
 
-            weatherData = new WeatherData(weatherTemperature, weatherTemperatureFelt, weatherPressure, weatherWind, weatherHumidity, weatherRain, weatherClouds, weatherState, weatherIcon);
-            loadingImage.Visibility = Visibility.Collapsed;
+                weatherData = new WeatherData(weatherTemperature, weatherTemperatureFelt, weatherPressure, weatherWind, weatherHumidity, weatherRain, weatherClouds, weatherState, weatherIcon);
+            }
+            catch
+            {
+                MessageBox.Show("Nie możemy pobrać informacji pogodowych. Sprawdź swoje połączenie z internetem", "Wystąpił problem", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+                loadingImage.Visibility = Visibility.Collapsed;
         }
 
 
@@ -86,15 +93,22 @@ namespace lab2
             download.Margin = new Thickness(0, 359, 0, 0);
             mainWeatherDataGrid.Visibility = Visibility.Visible;
             additionaWeatherDataGrid.Visibility = Visibility.Visible;
-            temperatureDisplay.Text = weatherData.Temperature + " °C";
-            temperatureFeltDisplay.Text = weatherData.TemperatureFelt + " °C";
-            stateDisplay.Text = weatherData.State;
-            windDisplay.Text = weatherData.Wind + " km/h";
-            pressureDisplay.Text = weatherData.Pressure + " hPa";
-            humidityDisplay.Text = weatherData.Humidity + " %";
-            cloudDisplay.Text = weatherData.Clouds + " %";
-            rainDisplay.Text = weatherData.Rain + " mm";
-            iconDisplay.Source = new BitmapImage(new Uri(weatherData.IconLink));
+            try
+            {
+                temperatureDisplay.Text = weatherData.Temperature + " °C";
+                temperatureFeltDisplay.Text = weatherData.TemperatureFelt + " °C";
+                stateDisplay.Text = weatherData.State;
+                windDisplay.Text = weatherData.Wind + " km/h";
+                pressureDisplay.Text = weatherData.Pressure + " hPa";
+                humidityDisplay.Text = weatherData.Humidity + " %";
+                cloudDisplay.Text = weatherData.Clouds + " %";
+                rainDisplay.Text = weatherData.Rain + " mm";
+                iconDisplay.Source = new BitmapImage(new Uri(weatherData.IconLink));
+            }
+            catch
+            {
+
+            }
 
             //downloadedDataBox.Text = "Temperatura: " + weatherData.Temperature + "\n";
             //downloadedDataBox.Text += "Temperatura odczuwalna: " + weatherData.TemperatureFelt + "\n";
